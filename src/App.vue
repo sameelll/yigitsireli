@@ -5,6 +5,7 @@ import Hero from './components/Hero.vue'
 import About from './components/About.vue'
 import Expertise from './components/Expertise.vue'
 import ScrollToTop from './components/ScrollToTop.vue'
+import Testimonials from './components/Testimonials.vue'
 
 const isDarkMode = ref(false)
 
@@ -55,6 +56,7 @@ const toggleDarkMode = () => {
     <Hero />
     <About />
     <Expertise />
+    <Testimonials />
     <ScrollToTop />
   </div>
 </template>

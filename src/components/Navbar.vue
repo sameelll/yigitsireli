@@ -34,7 +34,7 @@ const handleScroll = (e: Event, href: string) => {
 const navItems = [
   { name: 'Hakkımda', href: '#about' },
   { name: 'Uzmanlık Alanları', href: '#expertise' },
-  { name: 'Makaleler', href: '#articles' },
+  { name: 'Müvekkil Görüşleri', href: '#testimonials' },
   { name: 'İletişim', href: '#contact' },
 ]
 </script>

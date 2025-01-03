@@ -14,6 +14,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
+
 // Add interface for expertise type
 interface Expertise {
   icon: any
@@ -24,7 +25,6 @@ interface Expertise {
 
 const selectedExpertise = ref<Expertise | null>(null)
 const isModalOpen = ref(false)
-const hasAnimated = ref(localStorage.getItem('expertiseAnimated') === 'true')
 
 const expertiseAreas = [
   {
@@ -123,24 +123,17 @@ const closeModal = () => {
 }
 
 onMounted(() => {
-  if (hasAnimated.value) return
-
   // Batch all GSAP operations
   gsap.config({ force3D: true }) // Enable hardware acceleration
 
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: '.expertise-section',
-      start: 'top center+=100',
       toggleActions: 'play none none none',
       fastScrollEnd: true,
       preventOverlaps: true,
       markers: false,
-      once: true
-    },
-    onComplete: () => {
-      hasAnimated.value = true
-      localStorage.setItem('expertiseAnimated', 'true')
+      once: true // Only play animation once
     }
   })
 
