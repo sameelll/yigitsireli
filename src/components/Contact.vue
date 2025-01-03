@@ -2,6 +2,11 @@
 import { ref, computed } from 'vue'
 import { useVuelidate } from '@vuelidate/core'
 import { required, email, minLength, maxLength } from '@vuelidate/validators'
+import emailjs from '@emailjs/browser'
+import { toast } from 'vue3-toastify'
+
+// Initialize EmailJS immediately
+emailjs.init('Kdw_hoF7XsxrMm5Ub')
 
 const formData = ref({
   name: '',
@@ -64,14 +69,47 @@ const handleSubmit = async () => {
   submitError.value = ''
 
   try {
-    // Here you would integrate with your email service
-    // For example, using EmailJS or a backend API
-    await new Promise(resolve => setTimeout(resolve, 1000)) // Simulated API call
-    submitSuccess.value = true
-    formData.value = { name: '', email: '', subject: '', message: '' }
-    v$.value.$reset()
-  } catch (error) {
-    submitError.value = 'Mesajınız gönderilemedi. Lütfen daha sonra tekrar deneyin.'
+    const templateParams = {
+      from_name: formData.value.name,
+      to_name: 'Yiğit Bey',
+      from_email: formData.value.email,
+      reply_to: formData.value.email,
+      subject: formData.value.subject,
+      message: formData.value.message,
+    }
+
+    const response = await emailjs.send(
+      'service_fioeqlt',
+      'template_dasjed9',
+      templateParams,
+      'Kdw_hoF7XsxrMm5Ub'
+    )
+
+    if (response.status === 200) {
+      submitSuccess.value = true
+      formData.value = { name: '', email: '', subject: '', message: '' }
+      v$.value.$reset()
+      
+      toast.success('Mesajınız başarıyla gönderildi. En kısa sürede size dönüş yapacağız.', {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_RIGHT,
+        theme: 'colored'
+      })
+    }
+  } catch (error: any) {
+    console.error('EmailJS error:', error)
+    let errorMessage = 'Mesajınız gönderilemedi. Lütfen daha sonra tekrar deneyin.'
+    
+    if (error?.text?.includes('service ID not found')) {
+      errorMessage = 'Email servisi yapılandırması hatalı. Lütfen site yöneticisi ile iletişime geçin.'
+    }
+    
+    submitError.value = errorMessage
+    toast.error(errorMessage, {
+      autoClose: 5000,
+      position: toast.POSITION.TOP_RIGHT,
+      theme: 'colored'
+    })
   } finally {
     isSubmitting.value = false
   }
@@ -240,20 +278,6 @@ const handleSubmit = async () => {
                   </svg>
                 </div>
               </button>
-
-              <div v-if="submitSuccess" 
-                   class="bg-green-100 dark:bg-green-800/30 border border-green-400 text-green-700 dark:text-green-200 px-4 py-3 rounded-md relative mt-4 animate-fadeIn" 
-                   role="alert">
-                <strong class="font-bold">Başarılı! </strong>
-                <span class="block sm:inline">Mesajınız başarıyla gönderildi. En kısa sürede size dönüş yapacağız.</span>
-              </div>
-
-              <div v-if="submitError" 
-                   class="bg-red-100 dark:bg-red-800/30 border border-red-400 text-red-700 dark:text-red-200 px-4 py-3 rounded-md relative mt-4 animate-fadeIn" 
-                   role="alert">
-                <strong class="font-bold">Hata! </strong>
-                <span class="block sm:inline">{{ submitError }}</span>
-              </div>
             </div>
           </form>
         </div>
