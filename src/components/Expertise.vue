@@ -126,31 +126,36 @@ onMounted(() => {
     scrollTrigger: {
       trigger: '.expertise-section',
       start: 'top center+=100',
-      toggleActions: 'play none none none'
+      toggleActions: 'play none none none',
+      fastScrollEnd: true,
+      preventOverlaps: true
     }
   })
 
-  gsap.set(['.expertise-title', '.expertise-description', '.expertise-card'], {
-    opacity: 0,
-    y: 30
-  })
+  gsap.set('.expertise-title', { opacity: 0, y: 20 })
+  gsap.set('.expertise-description', { opacity: 0, y: 20 })
+  gsap.set('.expertise-card', { opacity: 0, y: 20 })
 
   tl.to('.expertise-title', {
     y: 0,
     opacity: 1,
-    duration: 0.8
+    duration: 0.4,
+    ease: 'power2.out'
   })
   .to('.expertise-description', {
     y: 0,
     opacity: 1,
-    duration: 0.8
-  }, '-=0.5')
+    duration: 0.4,
+    ease: 'power2.out'
+  }, '-=0.2')
   .to('.expertise-card', {
     y: 0,
     opacity: 1,
-    duration: 0.5,
-    stagger: 0.1
-  }, '-=0.5')
+    duration: 0.3,
+    stagger: 0.05,
+    ease: 'power2.out',
+    clearProps: 'all'
+  }, '-=0.2')
 })
 </script>
 

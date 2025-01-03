@@ -3,6 +3,19 @@ import { Phone, BookOpen } from 'lucide-vue-next'
 import { onMounted } from 'vue'
 import gsap from 'gsap'
 
+const scrollToSection = (e: Event, sectionId: string) => {
+  e.preventDefault()
+  const element = document.getElementById(sectionId)
+  if (element) {
+    const navbarHeight = 64 // This matches the navbar height
+    const targetPosition = element.getBoundingClientRect().top + window.pageYOffset - navbarHeight
+    window.scrollTo({
+      top: targetPosition,
+      behavior: 'smooth'
+    })
+  }
+}
+
 onMounted(() => {
   const tl = gsap.timeline({ defaults: { ease: 'power4.out' } })
   
@@ -63,6 +76,7 @@ onMounted(() => {
         <div class="hero-buttons flex flex-col gap-3 sm:gap-4 max-w-xs mx-auto md:max-w-none md:mx-0 md:flex-row">
           <a 
             href="#contact" 
+            @click="(e) => scrollToSection(e, 'contact')"
             class="group relative w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 text-base sm:text-lg font-semibold text-white bg-[#1a365d] rounded-xl shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-offset-2 focus:ring-offset-gray-900 transform-gpu transition-all duration-200 ease-out"
             aria-label="İletişime Geçin"
           >
@@ -72,6 +86,7 @@ onMounted(() => {
           </a>
           <a 
             href="#expertise" 
+            @click="(e) => scrollToSection(e, 'expertise')"
             class="group relative w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 text-base sm:text-lg font-semibold text-white bg-[#8B7355]/20 rounded-xl border border-[#8B7355]/30 backdrop-blur-sm hover:bg-[#8B7355]/30 focus:outline-none focus:ring-2 focus:ring-[#8B7355]/50 focus:ring-offset-2 focus:ring-offset-gray-900 transform-gpu transition-all duration-200 ease-out"
             aria-label="Uzmanlık Alanları"
           >
