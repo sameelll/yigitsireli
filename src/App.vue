@@ -3,6 +3,8 @@ import { ref, onMounted, watch } from 'vue'
 import Navbar from './components/Navbar.vue'
 import Hero from './components/Hero.vue'
 import About from './components/About.vue'
+import Expertise from './components/Expertise.vue'
+import ScrollToTop from './components/ScrollToTop.vue'
 
 const isDarkMode = ref(false)
 
@@ -48,18 +50,19 @@ const toggleDarkMode = () => {
 </script>
 
 <template>
-  <div :class="{ 'dark': isDarkMode }">
-    <div class="min-h-screen bg-white dark:bg-[#1a1f2d] transition-colors duration-300">
-      <Navbar :isDarkMode="isDarkMode" @toggle-dark-mode="toggleDarkMode" />
-      <Hero />
-      <About />
-    </div>
+  <div class="min-h-screen bg-white dark:bg-[#1a1f2d] transition-colors duration-300">
+    <Navbar :isDarkMode="isDarkMode" @toggle-dark-mode="toggleDarkMode" />
+    <Hero />
+    <About />
+    <Expertise />
+    <ScrollToTop />
   </div>
 </template>
 
 <style>
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 64px; /* This matches the navbar height (h-16) */
 }
 
 @media (prefers-reduced-motion: reduce) {

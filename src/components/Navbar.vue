@@ -12,6 +12,25 @@ const emit = defineEmits<{
 
 const isMenuOpen = ref(false)
 
+const handleScroll = (e: Event, href: string) => {
+  e.preventDefault()
+  const targetId = href.replace('#', '')
+  const targetElement = document.getElementById(targetId)
+  
+  if (targetElement) {
+    const navbarHeight = 64 // This is h-16 in pixels
+    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight
+    
+    window.scrollTo({
+      top: targetPosition,
+      behavior: 'smooth'
+    })
+  }
+  
+  // Close mobile menu if open
+  isMenuOpen.value = false
+}
+
 const navItems = [
   { name: 'Hakkımda', href: '#about' },
   { name: 'Uzmanlık Alanları', href: '#expertise' },
@@ -25,7 +44,7 @@ const navItems = [
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between h-16">
         <div class="flex items-center">
-          <a href="#" class="flex-shrink-0 flex items-center">
+          <a @click="(e) => handleScroll(e, '#home')" href="#home" class="flex-shrink-0 flex items-center">
             <h1 class="text-xl font-bold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200">
               Av. Yiğit Şireli
             </h1>
@@ -35,7 +54,10 @@ const navItems = [
         <!-- Desktop Menu -->
         <div class="hidden md:flex items-center space-x-8">
           <div class="flex space-x-6">
-            <a v-for="item in navItems" :key="item.name" :href="item.href"
+            <a v-for="item in navItems" 
+               :key="item.name" 
+               :href="item.href"
+               @click="(e) => handleScroll(e, item.href)"
               class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 text-sm font-medium transition-colors duration-200">
               {{ item.name }}
             </a>
@@ -66,7 +88,10 @@ const navItems = [
     <!-- Mobile menu -->
     <div :class="{ 'block': isMenuOpen, 'hidden': !isMenuOpen }" class="md:hidden">
       <div class="px-2 pt-2 pb-3 space-y-1">
-        <a v-for="item in navItems" :key="item.name" :href="item.href"
+        <a v-for="item in navItems" 
+           :key="item.name" 
+           :href="item.href"
+           @click="(e) => handleScroll(e, item.href)"
           class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200">
           {{ item.name }}
         </a>
