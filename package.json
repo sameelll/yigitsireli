@@ -10,6 +10,8 @@
     "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
+    "@vuelidate/core": "^2.0.3",
+    "@vuelidate/validators": "^2.0.4",
     "gsap": "^3.12.4",
     "lucide-vue-next": "^0.303.0",
     "vue": "^3.3.11",
