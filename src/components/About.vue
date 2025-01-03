@@ -87,7 +87,7 @@ onMounted(() => {
 <template>
   <section 
     id="about" 
-    class="about-section relative py-12 bg-white dark:bg-gray-900"
+    class="about-section relative py-12 bg-gray-200 dark:bg-gray-900"
     style="contain: content"
   >
     <div 
@@ -155,7 +155,7 @@ onMounted(() => {
             }
           ]"
           :key="index"
-          class="feature-card group p-4 rounded-lg bg-gray-50 dark:bg-[#1a365d]/20 border border-gray-100 dark:border-[#1a365d]/30 backdrop-blur-sm hover:bg-gray-100 dark:hover:bg-[#1a365d]/30 transition-all duration-300"
+          class="feature-card group p-4 rounded-lg bg-white/95 dark:bg-[#1a365d]/20 border border-gray-300 dark:border-[#1a365d]/30 backdrop-blur-sm hover:bg-gray-50 dark:hover:bg-[#1a365d]/30 transition-all duration-300"
           style="will-change: transform; transform: translateZ(0); contain: content"
         >
           <div class="flex items-center gap-3 mb-2">

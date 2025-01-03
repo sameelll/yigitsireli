@@ -53,7 +53,7 @@ const toggleDarkMode = () => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-white dark:bg-[#1a1f2d] transition-colors duration-300">
+  <div class="min-h-screen bg-gray-200 dark:bg-[#1a1f2d] transition-colors duration-300">
     <Navbar :isDarkMode="isDarkMode" @toggle-dark-mode="toggleDarkMode" />
     <Hero />
     <About />

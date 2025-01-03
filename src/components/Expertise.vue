@@ -187,7 +187,7 @@ onMounted(() => {
 <template>
   <section 
     id="expertise" 
-    class="expertise-section relative py-16 bg-white dark:bg-gray-900"
+    class="expertise-section relative py-16 bg-gray-200 dark:bg-gray-900"
   >
     <div class="container mx-auto px-4">
       <!-- Section Header -->
@@ -214,7 +214,7 @@ onMounted(() => {
         <div 
           v-for="(area, index) in expertiseAreas" 
           :key="index"
-          class="expertise-card group relative bg-gray-50 dark:bg-gray-800/50 rounded-xl shadow-sm hover:shadow-md transition-all duration-300"
+          class="expertise-card group relative bg-white/95 dark:bg-gray-800/50 rounded-xl shadow-sm hover:shadow-md transition-all duration-300"
           style="will-change: transform, opacity"
         >
           <div class="p-4 sm:p-6 h-full flex flex-col">

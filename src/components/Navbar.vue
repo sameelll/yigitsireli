@@ -40,7 +40,7 @@ const navItems = [
 </script>
 
 <template>
-  <nav class="fixed w-full bg-white dark:bg-gray-900 shadow-md z-50">
+  <nav class="fixed w-full bg-gray-200 dark:bg-gray-900 shadow-md z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between h-16">
         <div class="flex items-center">
@@ -63,7 +63,7 @@ const navItems = [
             </a>
           </div>
           <button @click="emit('toggle-dark-mode')"
-            class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200">
+            class="p-2 rounded-lg bg-white/95 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
             <Sun v-if="isDarkMode" class="h-5 w-5" />
             <Moon v-else class="h-5 w-5" />
           </button>
@@ -72,12 +72,12 @@ const navItems = [
         <!-- Mobile menu button -->
         <div class="flex items-center md:hidden">
           <button @click="emit('toggle-dark-mode')"
-            class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 mr-2">
+            class="p-2 rounded-lg bg-white/95 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 mr-2">
             <Sun v-if="isDarkMode" class="h-5 w-5" />
             <Moon v-else class="h-5 w-5" />
           </button>
           <button @click="isMenuOpen = !isMenuOpen"
-            class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200">
+            class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-white/95 dark:hover:bg-gray-800 transition-colors duration-200">
             <Menu v-if="!isMenuOpen" class="h-6 w-6" />
             <X v-else class="h-6 w-6" />
           </button>
@@ -86,13 +86,13 @@ const navItems = [
     </div>
 
     <!-- Mobile menu -->
-    <div :class="{ 'block': isMenuOpen, 'hidden': !isMenuOpen }" class="md:hidden">
+    <div :class="{ 'block': isMenuOpen, 'hidden': !isMenuOpen }" class="md:hidden bg-gray-200 dark:bg-gray-900">
       <div class="px-2 pt-2 pb-3 space-y-1">
         <a v-for="item in navItems" 
            :key="item.name" 
            :href="item.href"
            @click="(e) => handleScroll(e, item.href)"
-          class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200">
+          class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-white/95 dark:hover:bg-gray-800 transition-colors duration-200">
           {{ item.name }}
         </a>
       </div>

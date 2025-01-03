@@ -58,7 +58,7 @@ const startAutoplay = () => {
 </script>
 
 <template>
-  <section id="testimonials" class="py-20 bg-gray-50 dark:bg-gray-800/50">
+  <section id="testimonials" class="py-20 bg-gray-200 dark:bg-gray-900">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
         <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
@@ -78,7 +78,7 @@ const startAutoplay = () => {
               name="slide"
               mode="out-in">
               <div :key="currentIndex" 
-                   class="h-[300px] w-full flex flex-col items-center justify-between p-8 bg-white dark:bg-gray-900 shadow-xl">
+                   class="h-[300px] w-full flex flex-col items-center justify-between p-8 bg-white/95 dark:bg-gray-800 shadow-xl">
                 <Quote class="w-10 h-10 text-blue-600 dark:text-blue-400" />
                 <div class="flex-1 flex items-center justify-center px-4">
                   <p class="text-base md:text-lg text-gray-700 dark:text-gray-300 text-center italic">
@@ -100,11 +100,11 @@ const startAutoplay = () => {
 
         <!-- Navigation buttons -->
         <button @click="prev"
-                class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 sm:-translate-x-12 p-2 rounded-full bg-white dark:bg-gray-800 shadow-lg text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200">
+                class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 sm:-translate-x-12 p-2 rounded-full bg-white/95 dark:bg-gray-800 shadow-lg text-gray-800 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
           <ChevronLeft class="w-6 h-6" />
         </button>
         <button @click="next"
-                class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 sm:translate-x-12 p-2 rounded-full bg-white dark:bg-gray-800 shadow-lg text-gray-800 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200">
+                class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 sm:translate-x-12 p-2 rounded-full bg-white/95 dark:bg-gray-800 shadow-lg text-gray-800 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
           <ChevronRight class="w-6 h-6" />
         </button>
 
