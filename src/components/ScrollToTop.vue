@@ -13,6 +13,11 @@ const scrollToTop = () => {
     top: 0,
     behavior: 'smooth'
   })
+  
+  // After scrolling, update the URL to root
+  setTimeout(() => {
+    window.history.pushState({}, '', '/')
+  }, 500) // Wait for scroll animation to complete
 }
 
 onMounted(() => {

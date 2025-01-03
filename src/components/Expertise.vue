@@ -6,46 +6,120 @@ import {
   FileText, 
   Users2, 
   ScrollText,
-  ArrowRight
+  X
 } from 'lucide-vue-next'
-import { onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
+// Add interface for expertise type
+interface Expertise {
+  icon: any
+  title: string
+  description: string
+  details: string[]
+}
+
+const selectedExpertise = ref<Expertise | null>(null)
+const isModalOpen = ref(false)
+
 const expertiseAreas = [
   {
     icon: Building2,
     title: 'Şirketler Hukuku',
-    description: 'Şirket kuruluşu, birleşme, devralma ve ticari sözleşmeler konularında danışmanlık.',
+    description: 'Şirket kuruluşu, birleşme, devralma ve ticari sözleşmeler konularında kapsamlı hukuki danışmanlık hizmetleri sunuyorum.',
+    details: [
+      'Şirket kuruluş işlemleri ve danışmanlığı',
+      'Şirket birleşme ve devralma süreçleri',
+      'Ticari sözleşmelerin hazırlanması ve müzakeresi',
+      'Şirket yönetim ve organizasyon danışmanlığı',
+      'Ortaklık anlaşmazlıklarının çözümü',
+      'Due diligence süreçleri',
+      'Yabancı yatırım danışmanlığı'
+    ]
   },
   {
     icon: Scale,
     title: 'Ceza Hukuku',
-    description: 'Ceza davalarında savunma ve hukuki danışmanlık hizmetleri.',
+    description: 'Ceza davalarında savunma ve hukuki danışmanlık hizmetleri kapsamında profesyonel destek sağlıyorum.',
+    details: [
+      'Ceza davalarında savunma',
+      'Soruşturma aşamasında hukuki destek',
+      'İtiraz ve temyiz süreçleri',
+      'Uzlaşma görüşmeleri',
+      'Adli sicil kayıtları',
+      'Hukuki mütalaa hazırlanması'
+    ]
   },
   {
     icon: Briefcase,
     title: 'İş Hukuku',
-    description: 'İşçi-işveren ilişkileri, iş sözleşmeleri ve işe iade davaları.',
+    description: 'İşçi-işveren ilişkileri, iş sözleşmeleri ve işe iade davaları konularında uzman hukuki danışmanlık veriyorum.',
+    details: [
+      'İş sözleşmelerinin hazırlanması',
+      'İşe iade davaları',
+      'Tazminat hesaplamaları',
+      'Toplu iş hukuku uyuşmazlıkları',
+      'İş kazası davaları',
+      'Çalışma izinleri',
+      'Sosyal güvenlik uyuşmazlıkları'
+    ]
   },
   {
     icon: FileText,
     title: 'Sözleşmeler Hukuku',
-    description: 'Her türlü sözleşme hazırlanması ve hukuki danışmanlık.',
+    description: 'Her türlü sözleşmenin hazırlanması, incelenmesi ve müzakeresi konularında profesyonel hukuki danışmanlık sağlıyorum.',
+    details: [
+      'Ticari sözleşmeler',
+      'Kira sözleşmeleri',
+      'Franchise sözleşmeleri',
+      'Lisans sözleşmeleri',
+      'Distribütörlük sözleşmeleri',
+      'Ortaklık sözleşmeleri',
+      'Sözleşme müzakereleri'
+    ]
   },
   {
     icon: Users2,
     title: 'Aile Hukuku',
-    description: 'Boşanma, nafaka, velayet ve miras davaları konularında destek.',
+    description: 'Boşanma, nafaka, velayet ve miras davaları konularında uzman hukuki destek ve danışmanlık hizmetleri sunuyorum.',
+    details: [
+      'Boşanma davaları',
+      'Nafaka hesaplamaları',
+      'Velayet davaları',
+      'Mal paylaşımı',
+      'Miras davaları',
+      'Aile içi şiddet davaları',
+      'Evlat edinme süreçleri'
+    ]
   },
   {
     icon: ScrollText,
     title: 'Arabuluculuk',
-    description: 'Uyuşmazlıkların çözümünde arabuluculuk hizmetleri.',
+    description: 'Uyuşmazlıkların alternatif çözüm yolları kapsamında profesyonel arabuluculuk hizmetleri sağlıyorum.',
+    details: [
+      'İş hukuku arabuluculuğu',
+      'Ticari uyuşmazlık arabuluculuğu',
+      'Tüketici uyuşmazlıkları',
+      'Kira uyuşmazlıkları',
+      'Aile hukuku arabuluculuğu',
+      'Online arabuluculuk hizmetleri'
+    ]
   }
 ]
+
+const showDetails = (expertise: Expertise) => {
+  selectedExpertise.value = expertise
+  isModalOpen.value = true
+  document.body.style.overflow = 'hidden'
+}
+
+const closeModal = () => {
+  isModalOpen.value = false
+  document.body.style.overflow = ''
+}
 
 onMounted(() => {
   const tl = gsap.timeline({
@@ -98,28 +172,90 @@ onMounted(() => {
         <div 
           v-for="(area, index) in expertiseAreas" 
           :key="index"
-          class="expertise-card group relative p-4 sm:p-6 bg-gray-50 dark:bg-gray-800/50 rounded-xl shadow-sm hover:shadow-md transition-all duration-300"
+          class="expertise-card group relative bg-gray-50 dark:bg-gray-800/50 rounded-xl shadow-sm hover:shadow-md transition-all duration-300"
         >
-          <div class="flex items-start gap-3 sm:gap-4 pr-8">
-            <div class="p-2 rounded-lg bg-white dark:bg-gray-700">
+          <div class="p-4 sm:p-6 h-full flex flex-col">
+            <div class="flex gap-3 sm:gap-4 mb-4">
+              <div class="w-10 h-10 flex items-center justify-center rounded-lg bg-white dark:bg-gray-700 flex-shrink-0">
+                <component 
+                  :is="area.icon" 
+                  class="h-5 w-5 text-[#1a365d] dark:text-blue-400"
+                />
+              </div>
+              <div class="flex-1">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                  {{ area.title }}
+                </h3>
+                <p class="text-sm text-gray-600 dark:text-gray-300">
+                  {{ area.description }}
+                </p>
+              </div>
+            </div>
+            <div class="mt-auto pt-4 border-t border-gray-100 dark:border-gray-700">
+              <button
+                @click="showDetails(area)"
+                class="text-sm font-medium text-[#1a365d] dark:text-blue-400 hover:text-[#2c5282] dark:hover:text-blue-300 transition-colors duration-200"
+              >
+                Detayları Göster →
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div
+      v-if="isModalOpen"
+      class="fixed inset-0 z-50 flex items-center justify-center"
+      @click="closeModal"
+    >
+      <!-- Backdrop -->
+      <div class="fixed inset-0 bg-gray-900/75 backdrop-blur-sm"></div>
+
+      <!-- Modal Content -->
+      <div
+        @click.stop
+        class="relative w-full max-w-lg mx-4 p-6 sm:p-8 bg-white dark:bg-gray-800 rounded-2xl shadow-xl z-10"
+      >
+        <button
+          @click="closeModal"
+          class="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-500 dark:text-gray-500 dark:hover:text-gray-400 transition-colors duration-200"
+        >
+          <X class="h-5 w-5" />
+        </button>
+
+        <div v-if="selectedExpertise" class="space-y-6">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-[#1a365d]/10 dark:bg-blue-500/10">
               <component 
-                :is="area.icon" 
+                :is="selectedExpertise.icon"
                 class="h-6 w-6 text-[#1a365d] dark:text-blue-400"
               />
             </div>
-            <div class="flex-1">
-              <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                {{ area.title }}
-              </h3>
-              <p class="text-sm text-gray-600 dark:text-gray-300">
-                {{ area.description }}
-              </p>
-            </div>
+            <h3 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
+              {{ selectedExpertise.title }}
+            </h3>
           </div>
-          
-          <!-- Hover Arrow -->
-          <div class="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 opacity-0 transform translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
-            <ArrowRight class="h-5 w-5 text-[#1a365d] dark:text-blue-400" />
+
+          <p class="text-base text-gray-600 dark:text-gray-300">
+            {{ selectedExpertise.description }}
+          </p>
+
+          <div class="space-y-3">
+            <h4 class="text-lg font-semibold text-gray-900 dark:text-white">
+              Sunulan Hizmetler
+            </h4>
+            <ul class="space-y-2">
+              <li
+                v-for="(detail, index) in selectedExpertise.details"
+                :key="index"
+                class="flex items-center gap-2 text-gray-600 dark:text-gray-300"
+              >
+                <div class="h-1.5 w-1.5 rounded-full bg-[#1a365d] dark:bg-blue-400"></div>
+                {{ detail }}
+              </li>
+            </ul>
           </div>
         </div>
       </div>
