@@ -24,6 +24,7 @@ interface Expertise {
 
 const selectedExpertise = ref<Expertise | null>(null)
 const isModalOpen = ref(false)
+const hasAnimated = ref(false)
 
 const expertiseAreas = [
   {
@@ -122,6 +123,8 @@ const closeModal = () => {
 }
 
 onMounted(() => {
+  if (hasAnimated.value) return
+
   // Batch all GSAP operations
   gsap.config({ force3D: true }) // Enable hardware acceleration
 
@@ -133,7 +136,10 @@ onMounted(() => {
       fastScrollEnd: true,
       preventOverlaps: true,
       markers: false,
-      once: true // Only play animation once
+      once: true
+    },
+    onComplete: () => {
+      hasAnimated.value = true
     }
   })
 
