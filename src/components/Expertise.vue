@@ -122,66 +122,107 @@ const closeModal = () => {
 }
 
 onMounted(() => {
+  // Batch all GSAP operations
+  gsap.config({ force3D: true }) // Enable hardware acceleration
+
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: '.expertise-section',
       start: 'top center+=100',
       toggleActions: 'play none none none',
       fastScrollEnd: true,
-      preventOverlaps: true
+      preventOverlaps: true,
+      markers: false,
+      once: true // Only play animation once
     }
   })
 
-  gsap.set('.expertise-title', { opacity: 0, y: 20 })
-  gsap.set('.expertise-description', { opacity: 0, y: 20 })
-  gsap.set('.expertise-card', { opacity: 0, y: 20 })
+  // Batch all initial states
+  const elements = {
+    title: document.querySelector('.expertise-title'),
+    description: document.querySelector('.expertise-description'),
+    cards: gsap.utils.toArray('.expertise-card')
+  }
 
-  tl.to('.expertise-title', {
-    y: 0,
-    opacity: 1,
-    duration: 0.4,
-    ease: 'power2.out'
+  // Set initial states in one batch
+  gsap.set([elements.title, elements.description], { 
+    opacity: 0,
+    y: 15,
+    force3D: true
   })
-  .to('.expertise-description', {
-    y: 0,
-    opacity: 1,
-    duration: 0.4,
-    ease: 'power2.out'
-  }, '-=0.2')
-  .to('.expertise-card', {
+  
+  gsap.set(elements.cards, { 
+    opacity: 0,
+    y: 15,
+    force3D: true
+  })
+
+  // Animate with optimized timeline
+  tl.to(elements.title, {
     y: 0,
     opacity: 1,
     duration: 0.3,
-    stagger: 0.05,
     ease: 'power2.out',
-    clearProps: 'all'
-  }, '-=0.2')
+    force3D: true
+  })
+  .to(elements.description, {
+    y: 0,
+    opacity: 1,
+    duration: 0.3,
+    ease: 'power2.out',
+    force3D: true
+  }, '-=0.1')
+  .to(elements.cards, {
+    y: 0,
+    opacity: 1,
+    duration: 0.2,
+    stagger: 0.03,
+    ease: 'power2.out',
+    force3D: true,
+    clearProps: 'transform' // Clear transforms after animation
+  }, '-=0.1')
 })
 </script>
 
 <template>
-  <section id="expertise" class="expertise-section relative py-16 bg-white dark:bg-gray-900">
+  <section 
+    id="expertise" 
+    class="expertise-section relative py-16 bg-white dark:bg-gray-900"
+  >
     <div class="container mx-auto px-4">
       <!-- Section Header -->
       <div class="text-center max-w-2xl mx-auto mb-12">
-        <h2 class="expertise-title text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        <h2 
+          class="expertise-title text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4"
+          style="will-change: transform, opacity"
+        >
           Uzmanlık Alanları
         </h2>
-        <p class="expertise-description text-base md:text-lg text-gray-600 dark:text-gray-300">
+        <p 
+          class="expertise-description text-base md:text-lg text-gray-600 dark:text-gray-300"
+          style="will-change: transform, opacity"
+        >
           Geniş kapsamlı hukuki hizmetler sunarak, müvekkillerimin her türlü hukuki ihtiyacında yanlarında oluyorum.
         </p>
       </div>
 
       <!-- Expertise Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+      <div 
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto"
+        style="contain: content"
+      >
         <div 
           v-for="(area, index) in expertiseAreas" 
           :key="index"
           class="expertise-card group relative bg-gray-50 dark:bg-gray-800/50 rounded-xl shadow-sm hover:shadow-md transition-all duration-300"
+          style="will-change: transform, opacity"
         >
           <div class="p-4 sm:p-6 h-full flex flex-col">
             <div class="flex gap-3 sm:gap-4 mb-4">
-              <div class="w-10 h-10 flex items-center justify-center rounded-lg bg-white dark:bg-gray-700 flex-shrink-0">
+              <div 
+                class="w-10 h-10 flex items-center justify-center rounded-lg bg-white dark:bg-gray-700 flex-shrink-0"
+                style="contain: strict; content-visibility: auto"
+              >
                 <component 
                   :is="area.icon" 
                   class="h-5 w-5 text-[#1a365d] dark:text-blue-400"
@@ -271,6 +312,10 @@ onMounted(() => {
 <style scoped>
 .expertise-card {
   border: 1px solid transparent;
+  transform: translateZ(0); /* Hardware acceleration */
+  backface-visibility: hidden;
+  perspective: 1000px;
+  contain: content;
 }
 
 .expertise-card:hover {
@@ -283,12 +328,12 @@ onMounted(() => {
 
 @media (prefers-reduced-motion: reduce) {
   .expertise-card {
-    transition: none;
+    transition: none !important;
+    transform: none !important;
   }
   
-  .expertise-card:hover .absolute {
-    transition: none;
-    transform: none;
+  .expertise-card:hover {
+    transform: none !important;
   }
 }
 </style> 
