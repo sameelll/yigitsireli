@@ -12,7 +12,8 @@
   "dependencies": {
     "gsap": "^3.12.4",
     "lucide-vue-next": "^0.303.0",
-    "vue": "^3.3.11"
+    "vue": "^3.3.11",
+    "vue3-lottie": "^3.3.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.5.2",
