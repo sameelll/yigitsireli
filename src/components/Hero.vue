@@ -34,7 +34,7 @@ onMounted(() => {
     <!-- Background Image with Overlay -->
     <div class="absolute inset-0">
       <img 
-        src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=2070"
+        src="../assets/images/law-background.webp"
         alt="Turkish Law Background" 
         class="w-full h-full object-cover"
       />
@@ -61,13 +61,22 @@ onMounted(() => {
         
         <!-- Buttons -->
         <div class="hero-buttons flex flex-col gap-3 sm:gap-4 max-w-xs mx-auto md:max-w-none md:mx-0 md:flex-row">
-          <a href="#contact" class="will-change-transform w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 text-base sm:text-lg font-semibold text-white bg-blue-600/90 hover:bg-blue-600 rounded-xl transform transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-blue-500/25 backdrop-blur-sm">
-            <Phone class="h-5 w-5 flex-shrink-0" />
-            <span class="whitespace-nowrap">İletişime Geçin</span>
+          <a 
+            href="#contact" 
+            class="group relative w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 text-base sm:text-lg font-semibold text-white bg-[#1a365d] rounded-xl shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-offset-2 focus:ring-offset-gray-900 transform-gpu transition-all duration-200 ease-out"
+            aria-label="İletişime Geçin"
+          >
+            <span class="absolute inset-0 w-full h-full rounded-xl bg-gradient-to-br from-[#1a365d] to-[#2c5282] opacity-0 group-hover:opacity-100 transition-opacity duration-200 ease-out"></span>
+            <Phone class="h-5 w-5 flex-shrink-0 relative" aria-hidden="true" />
+            <span class="relative whitespace-nowrap">İletişime Geçin</span>
           </a>
-          <a href="#expertise" class="will-change-transform w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 text-base sm:text-lg font-semibold text-white bg-white/10 hover:bg-white/20 rounded-xl border border-white/10 backdrop-blur-sm transform transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]">
-            <BookOpen class="h-5 w-5 flex-shrink-0" />
-            <span class="whitespace-nowrap">Uzmanlık Alanları</span>
+          <a 
+            href="#expertise" 
+            class="group relative w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 text-base sm:text-lg font-semibold text-white bg-[#8B7355]/20 rounded-xl border border-[#8B7355]/30 backdrop-blur-sm hover:bg-[#8B7355]/30 focus:outline-none focus:ring-2 focus:ring-[#8B7355]/50 focus:ring-offset-2 focus:ring-offset-gray-900 transform-gpu transition-all duration-200 ease-out"
+            aria-label="Uzmanlık Alanları"
+          >
+            <BookOpen class="h-5 w-5 flex-shrink-0 relative" aria-hidden="true" />
+            <span class="relative whitespace-nowrap">Uzmanlık Alanları</span>
           </a>
         </div>
       </div>
@@ -84,17 +93,33 @@ onMounted(() => {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Prevent layout shifts */
+/* Performance optimizations for buttons */
 .hero-buttons a {
+  will-change: transform;
+  transform: translateZ(0);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  -webkit-transform: translateZ(0) scale(1, 1);
 }
 
-/* Optimize animations */
+/* Active state for buttons */
+.hero-buttons a:active {
+  transform: translateY(1px) scale(0.99);
+}
+
+/* Reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
   .hero-buttons a {
     transition: none;
     transform: none !important;
+  }
+  
+  .hero-buttons a:active {
+    transform: none !important;
+  }
+  
+  .group:hover .absolute {
+    transition: none;
   }
 }
 </style> 
