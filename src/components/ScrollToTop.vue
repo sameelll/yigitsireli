@@ -41,7 +41,7 @@ onUnmounted(() => {
     <button
       v-show="isVisible"
       @click="scrollToTop"
-      class="fixed bottom-6 right-6 p-3 rounded-xl bg-[#1a365d] dark:bg-blue-600/20 shadow-lg hover:shadow-xl backdrop-blur-sm border border-transparent dark:border-blue-500/20 text-white dark:text-blue-400 hover:bg-[#2c5282] dark:hover:bg-blue-600/30 transform hover:-translate-y-1 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 z-50"
+      class="fixed bottom-6 right-6 p-3 rounded-xl bg-[#1a365d] dark:bg-blue-600/20 shadow-lg hover:shadow-xl backdrop-blur-sm border border-transparent dark:border-blue-500/20 text-white dark:text-white hover:bg-[#2c5282] dark:hover:bg-blue-600/30 transform hover:-translate-y-1 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 z-50"
       aria-label="Yukarı Çık"
     >
       <ArrowUp class="h-5 w-5" />
