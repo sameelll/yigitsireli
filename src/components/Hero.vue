@@ -67,7 +67,7 @@ onMounted(() => {
 <template>
   <section 
     id="home" 
-    class="relative min-h-screen flex items-center justify-center overflow-hidden"
+    class="relative min-h-screen flex items-center justify-center overflow-hidden bg-section-light-secondary dark:bg-section-dark-secondary"
     style="contain: content"
   >
     <!-- Background Image with Overlay -->

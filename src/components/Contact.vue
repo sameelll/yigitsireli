@@ -79,14 +79,14 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <section id="contact" class="py-12 bg-gray-200 dark:bg-gray-900">
+  <section id="contact" class="py-12 bg-section-light-secondary dark:bg-section-dark-secondary">
     <div class="container mx-auto px-4 max-w-4xl">
       <h2 class="text-3xl font-bold text-center mb-8 text-gray-900 dark:text-white">İletişim</h2>
       
       <div class="grid md:grid-cols-2 gap-6">
         <!-- Contact Information -->
         <div class="flex flex-col h-full">
-          <div class="bg-white/95 dark:bg-gray-800 p-4 rounded-lg shadow-md mb-3">
+          <div class="bg-section-light-primary/95 dark:bg-section-dark-primary/95 p-4 rounded-lg shadow-md mb-3">
             <h3 class="text-lg font-semibold mb-3 text-gray-900 dark:text-white">İletişim Bilgileri</h3>
             <div class="space-y-2.5">
               <div class="flex items-start">
@@ -133,7 +133,7 @@ const handleSubmit = async () => {
           </div>
 
           <!-- Map -->
-          <div class="bg-white/95 dark:bg-gray-800 p-3 rounded-lg shadow-md">
+          <div class="bg-section-light-primary/95 dark:bg-section-dark-primary/95 p-3 rounded-lg shadow-md">
             <iframe
               class="w-full h-[200px] rounded"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3011.6504900120027!2d28.97206661541928!3d41.02757507929921!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab9e7a7777c43%3A0x4c76cf3dcc8b330b!2sGalata%20Tower!5e0!3m2!1sen!2str!4v1620831095297!5m2!1sen!2str"
@@ -146,7 +146,7 @@ const handleSubmit = async () => {
         </div>
 
         <!-- Contact Form -->
-        <div class="bg-white/95 dark:bg-gray-800 p-4 rounded-lg shadow-md h-full">
+        <div class="bg-section-light-primary/95 dark:bg-section-dark-primary/95 p-4 rounded-lg shadow-md h-full">
           <h3 class="text-lg font-semibold mb-3 text-gray-900 dark:text-white">Bize Ulaşın</h3>
           <form @submit.prevent="handleSubmit" class="flex flex-col h-[calc(100%-2rem)]">
             <div class="space-y-3 flex-1 flex flex-col">

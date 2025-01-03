@@ -187,7 +187,7 @@ onMounted(() => {
 <template>
   <section 
     id="expertise" 
-    class="expertise-section relative py-16 bg-gray-200 dark:bg-gray-900"
+    class="expertise-section relative py-16 bg-section-light-secondary dark:bg-section-dark-secondary"
   >
     <div class="container mx-auto px-4">
       <!-- Section Header -->

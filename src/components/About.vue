@@ -87,7 +87,7 @@ onMounted(() => {
 <template>
   <section 
     id="about" 
-    class="about-section relative py-12 bg-gray-200 dark:bg-gray-900"
+    class="about-section relative py-12 bg-section-light-primary dark:bg-section-dark-primary"
     style="contain: content"
   >
     <div 

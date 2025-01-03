@@ -63,7 +63,7 @@ const navItems = [
             </a>
           </div>
           <button @click="emit('toggle-dark-mode')"
-            class="p-2 rounded-lg bg-white/95 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
+            class="p-2 rounded-lg bg-gray-200 dark:bg-gray-900 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-800 transition-colors duration-200">
             <Sun v-if="isDarkMode" class="h-5 w-5" />
             <Moon v-else class="h-5 w-5" />
           </button>
@@ -72,7 +72,7 @@ const navItems = [
         <!-- Mobile menu button -->
         <div class="flex items-center md:hidden">
           <button @click="emit('toggle-dark-mode')"
-            class="p-2 rounded-lg bg-white/95 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 mr-2">
+            class="p-2 rounded-lg bg-gray-200 dark:bg-gray-900 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-800 transition-colors duration-200 mr-2">
             <Sun v-if="isDarkMode" class="h-5 w-5" />
             <Moon v-else class="h-5 w-5" />
           </button>
