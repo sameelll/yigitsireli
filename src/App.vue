@@ -2,6 +2,7 @@
 import { ref, onMounted, watch } from 'vue'
 import Navbar from './components/Navbar.vue'
 import Hero from './components/Hero.vue'
+import About from './components/About.vue'
 
 const isDarkMode = ref(false)
 
@@ -51,6 +52,19 @@ const toggleDarkMode = () => {
     <div class="min-h-screen bg-white dark:bg-[#1a1f2d] transition-colors duration-300">
       <Navbar :isDarkMode="isDarkMode" @toggle-dark-mode="toggleDarkMode" />
       <Hero />
+      <About />
     </div>
   </div>
 </template>
+
+<style>
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+</style>
