@@ -24,7 +24,7 @@ interface Expertise {
 
 const selectedExpertise = ref<Expertise | null>(null)
 const isModalOpen = ref(false)
-const hasAnimated = ref(false)
+const hasAnimated = ref(localStorage.getItem('expertiseAnimated') === 'true')
 
 const expertiseAreas = [
   {
@@ -140,6 +140,7 @@ onMounted(() => {
     },
     onComplete: () => {
       hasAnimated.value = true
+      localStorage.setItem('expertiseAnimated', 'true')
     }
   })
 
