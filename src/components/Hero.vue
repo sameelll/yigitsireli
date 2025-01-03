@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { Scale } from 'lucide-vue-next'
+import { Phone, BookOpen } from 'lucide-vue-next'
 import { onMounted } from 'vue'
 import gsap from 'gsap'
 
 onMounted(() => {
-  const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
+  const tl = gsap.timeline({ defaults: { ease: 'power4.out' } })
   
-  tl.from('.hero-icon', {
-    y: -50,
+  tl.from('.hero-badge', {
+    y: 30,
     opacity: 0,
-    duration: 1
+    duration: 0.8
   })
   .from('.hero-title', {
     y: 30,
@@ -21,61 +21,70 @@ onMounted(() => {
     opacity: 0,
     duration: 0.8
   }, '-=0.5')
-  .from('.hero-buttons > *', {
+  .from('.hero-buttons', {
     y: 20,
     opacity: 0,
-    duration: 0.5,
-    stagger: 0.2
+    duration: 0.8
   }, '-=0.5')
 })
 </script>
 
 <template>
-  <div class="relative min-h-screen overflow-hidden bg-white dark:bg-[#1a1f2d]">
-    <div class="absolute inset-0 bg-grid-pattern opacity-5"></div>
-    
-    <div class="relative pt-32 lg:pt-40 pb-20 lg:pb-32">
-      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="max-w-3xl">
-          <div class="flex items-center space-x-4 mb-8">
-            <Scale class="hero-icon h-12 w-12 text-[#4d9fff]" strokeWidth={1.5} />
-            <h1 class="hero-title text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white">
-              Av. Yiğit Şireli
-            </h1>
+  <section class="relative min-h-screen flex items-center bg-white dark:bg-[#1a1f2d]">
+    <!-- Content -->
+    <div class="container relative mx-auto px-4 py-8 sm:py-12 md:py-16">
+      <div class="flex flex-col gap-8 md:gap-12 max-w-xl">
+        <!-- Top Content -->
+        <div class="space-y-6 text-center md:text-left">
+          <div class="hero-badge inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-blue-50 dark:bg-gray-800 text-blue-600 dark:text-blue-400 mx-auto md:mx-0 border border-blue-100 dark:border-gray-700">
+            <span class="text-xs sm:text-sm font-medium whitespace-nowrap">İstanbul Barosu Üyesi</span>
           </div>
           
-          <div class="space-y-8">
-            <p class="hero-description text-xl lg:text-2xl text-gray-600 dark:text-gray-300 leading-relaxed">
-              Hukuki haklarınızı korumak ve en iyi sonuçları elde etmek için profesyonel hukuk hizmetleri sunuyorum.
-            </p>
-            
-            <p class="text-xl lg:text-2xl text-[#4d9fff]">
-              20 yılı aşkın tecrübemle yanınızdayım.
-            </p>
-
-            <div class="hero-buttons flex flex-col sm:flex-row gap-4 mt-8">
-              <a href="#contact"
-                class="group relative inline-flex items-center justify-center px-8 py-3 text-lg font-semibold text-white bg-[#4d9fff] rounded-lg overflow-hidden transition-all duration-300 hover:bg-[#3d8fee]">
-                <span class="relative z-10">İletişime Geçin</span>
-                <div class="absolute inset-0 -translate-x-full group-hover:translate-x-0 bg-[#3d8fee] transition-transform duration-300"></div>
-              </a>
-              <a href="#expertise"
-                class="group relative inline-flex items-center justify-center px-8 py-3 text-lg font-semibold text-gray-900 dark:text-white bg-white dark:bg-gray-800 rounded-lg overflow-hidden transition-all duration-300 hover:text-[#4d9fff] border-2 border-gray-200 dark:border-gray-700">
-                <span class="relative z-10">Uzmanlık Alanları</span>
-                <div class="absolute inset-0 -translate-y-full group-hover:translate-y-0 bg-gray-100 dark:bg-gray-700 transition-transform duration-300"></div>
-              </a>
-            </div>
-          </div>
+          <h1 class="hero-title text-balance text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white leading-tight">
+            <span class="inline-block">Av. Yiğit</span> <span class="inline-block">Şireli</span>
+          </h1>
+          
+          <p class="hero-description text-pretty text-lg sm:text-xl text-gray-600 dark:text-gray-300 leading-relaxed mx-auto md:mx-0">
+            20 yılı aşkın tecrübemle, hukuki haklarınızı korumak ve en iyi sonuçları elde etmek için yanınızdayım.
+          </p>
+        </div>
+        
+        <!-- Buttons -->
+        <div class="hero-buttons flex flex-col gap-3 sm:gap-4 max-w-xs mx-auto md:max-w-none md:mx-0 md:flex-row">
+          <a href="#contact" class="will-change-transform w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 text-base sm:text-lg font-semibold text-white bg-blue-600 rounded-xl hover:bg-blue-700 transform transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-blue-500/25">
+            <Phone class="h-5 w-5 flex-shrink-0" />
+            <span class="whitespace-nowrap">İletişime Geçin</span>
+          </a>
+          <a href="#expertise" class="will-change-transform w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 text-base sm:text-lg font-semibold text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-blue-600 dark:hover:border-blue-500 transform transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]">
+            <BookOpen class="h-5 w-5 flex-shrink-0" />
+            <span class="whitespace-nowrap">Uzmanlık Alanları</span>
+          </a>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <style scoped>
-.bg-grid-pattern {
-  background-image: linear-gradient(to right, rgba(128,128,128,.1) 1px, transparent 1px),
-                    linear-gradient(to bottom, rgba(128,128,128,.1) 1px, transparent 1px);
-  background-size: 24px 24px;
+/* Optimize performance */
+.hero-title,
+.hero-description {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Prevent layout shifts */
+.hero-buttons a {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Optimize animations */
+@media (prefers-reduced-motion: reduce) {
+  .hero-buttons a {
+    transition: none;
+    transform: none !important;
+  }
 }
 </style> 
